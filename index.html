@@ -1,0 +1,82 @@
+<html>
+<head>
+	<title></title>
+	<style>
+		body {
+			background-color: rgb(0,100,100);
+		}
+		
+		p {
+			height: 100vh;
+			text-align: center;
+			color: #fff;
+		}
+
+		#back-to-top {
+			position: fixed;
+			bottom: 3rem;
+			right: 3rem;
+			background-color: rgba(255, 255, 255, .9);
+			color: #313943;
+			border: none;
+			border-radius: 5px;
+			padding: 1rem;
+			text-transform: uppercase;
+			cursor: pointer;
+		
+			box-shadow: 0 0 2rem rgba(0, 0, 0, .25);
+			transition: all .3s ease-in-out;
+			display: inline-block;
+			text-decoration: none;
+			font-size: .75rem;
+			font-weight: 900;
+			opacity: 0;
+		}
+
+		#back-to-top:hover {
+			brackground-color: #fff;
+			padding: 1rem 3rem;
+		}
+
+		.visible {
+			opacity: 1 !important;
+		}
+	</style>
+</head>
+<body>
+	<div id="back-to-top">TOP</div>
+	<p>First content</p>
+	<p>Second content</p>
+	<p>Third content</p>
+	<script>
+		var btt = document.getElementById("back-to-top"),
+			body = document.body,
+			docElem = document.documentElement,
+			offset = 100,
+			scrollPos, docHeight,
+			isFirefox = navigator.userAgent.toLowerCase().indexOf('fierfox') > -1;
+
+		// Calculate the document height
+		docHeight = Math.max(body.scrollHeight, body.offsetHeight, docElem.clientHeight, docElem.scrollHeight, docElem.offsetHeight);
+		if (docHeight != "undefined") {
+			offset = docHeight / 4;
+		}
+
+		// Add scroll event listener
+		window.addEventListener( "scroll", function(event) {
+			scrollPos = body.scrollTop || docElem.scrollTop;
+			btt.className = (scrollPos > offset) ? "visible" : "";
+		});
+
+		// Add click event listener
+		btt.addEventListener("click", function(event) {
+			event.preventDefault();
+			if (isFirefox) {
+				docElem.scrollTop = 0;
+			} else {
+				body.scrollTop = 0;
+			}
+		});
+	</script>
+</body>
+</html>
